@@ -1,8 +1,8 @@
-const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
-
 export const requestRooms = async () => {
-    // simulate request
-    // await sleep(Math.random() * 3000)
+    const urlParams = new URLSearchParams(window.location.search);
+    const promocode = urlParams.get('promo_code');
+    const discount = parseInt(promocode) || 0
+
     const rooms = [
         {
             id: 1,
@@ -13,7 +13,7 @@ export const requestRooms = async () => {
             beds: 1,
             people: 2,
             type: "double",
-            price: 200,
+            price: 200.0,
             photo: "/assets/rooms/room_1.png",
         },
         {
@@ -25,7 +25,7 @@ export const requestRooms = async () => {
             beds: 1,
             people: 2,
             type: "double",
-            price: 350,
+            price: 350.0,
             photo: "/assets/rooms/room_2.png",
         },
         {
@@ -37,9 +37,19 @@ export const requestRooms = async () => {
             beds: 3,
             people: 4,
             type: "double",
-            price: 450,
+            price: 450.0,
             photo: "/assets/rooms/room_3.png",
         },
     ];
-    return {rooms}
+    return {
+        rooms: rooms.map(room => {
+            if (discount) {
+                room.price = Math.max(
+                    room.price - (room.price * discount / 100),
+                    0
+                )
+            }
+            return room
+        })
+    }
 }

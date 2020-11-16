@@ -9,6 +9,7 @@
     @tailwind utilities;
     body {
         color: #444;
+        @apply font-light;
     }
 </style>
 

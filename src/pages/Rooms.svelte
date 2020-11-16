@@ -53,22 +53,27 @@
 
         <div>
             {#each rooms as room}
-                <RoomItem {...room} on:click={() => onRoomSelect(room)} />
+                <RoomItem
+                    {...room}
+                    on:click={() => onRoomSelect(room)}
+                    selected={room.id === selectedRoom?.id} />
             {/each}
         </div>
     </div>
     <div class="w-full md:w-1/3 flex flex-col justify-center align-middle">
-        <div class="h-56 mx-auto mb-auto px-4">
-            <div class="flex h-full">
+        <div class="md:h-56 mx-auto mb-auto px-4">
+            <div class="hidden md:flex h-full overflow-hidden">
                 <img
-                    class="mt-auto hidden md:flex"
+                    class="mt-auto"
                     src="/assets/los-cocos-img-bg.png"
                     alt="coconut summary decoration" />
             </div>
-            <Summary
-                room={selectedRoom}
-                book={$bookDataStore}
-                onSave={onSaveSummary} />
+            <div class="mt-8 md:mt-0">
+                <Summary
+                    room={selectedRoom}
+                    book={$bookDataStore}
+                    onSave={onSaveSummary} />
+            </div>
         </div>
     </div>
 </div>

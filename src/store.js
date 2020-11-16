@@ -15,11 +15,11 @@ function createBookDataStore() {
     }
 
     const initialData = {
-        checkin: storedData.checkin || today.toJSON().slice(0, 10),
-        checkout: storedData.checkout || tomorrow.toJSON().slice(0, 10),
-        adults: storedData.adults || 2,
-        children: storedData.children || 0,
-        roomId: storedData.roomId || undefined
+        checkin: storedData?.checkin || today.toJSON().slice(0, 10),
+        checkout: storedData?.checkout || tomorrow.toJSON().slice(0, 10),
+        adults: storedData?.adults || 2,
+        children: storedData?.children || 0,
+        roomId: storedData?.roomId || undefined
     }
 
     const { subscribe, set, update } = writable(initialData)
@@ -29,7 +29,6 @@ function createBookDataStore() {
             status.roomId = roomId
             return status
         })
-        // subscribe, set store, unsubscribe
         subscribe(status => localStorage.setItem(BOOK_DATA_STORE_KEY, JSON.stringify(status)))()
     }
 

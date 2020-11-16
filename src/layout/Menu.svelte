@@ -6,14 +6,14 @@
 </script>
 
 <div class="flex md:hidden justify-between p-2">
-    <img class="" src="/assets/los-cocos-iso-footer.png" alt="los-cocos-logo" />
+    <img src="/assets/los-cocos-iso-footer.png" alt="los-cocos-logo" />
     <button on:click={toggleMenu}>MENU</button>
 </div>
 
 <div
     class:flex={isOpen}
     class:hidden={!isOpen}
-    class="font-dosis md:flex flex-col md:flex-row w-full md:h-16 items-center md:justify-evenly
+    class="font-dosis md:flex flex-col mt-16 md:mt-0 md:flex-row w-full md:h-16 items-center md:justify-evenly
         sm:max-w-screen-lg m-auto fixed md:relative bg-white">
     <a href="/" class="px-4 py-2 hover:underline">Home</a>
     <a href="/" class="px-4 py-2 hover:underline">Rooms</a>

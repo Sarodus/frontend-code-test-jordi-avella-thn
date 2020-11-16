@@ -1,3 +1,4 @@
-13-11-2020 17:00 - 21:00 - setup + menu + form
-15-11-2020 11:00 - 12:30 - step selector
-15-11-2020 19:00 - 21:30 - room item + summary
+13-11-2020 17:00 - 21:00 - (4h) - setup + menu + form
+15-11-2020 11:00 - 12:30 - (1:30h) - step selector
+15-11-2020 19:00 - 21:30 - (2:30h) - room item + summary
+16-11-2020 15:30 - 17:00 - (1:30h) - footer + details
