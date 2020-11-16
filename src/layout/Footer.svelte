@@ -21,19 +21,19 @@
 
     <div class="flex">
         <a class="px-4 sm:px-2" href="/">
-            <img class="w-5" src="/assets/social/rss.svg" alt="rss" />
+            <img width="20" src="/assets/social/rss.svg" alt="rss" />
         </a>
         <a class="px-4 sm:px-2" href="/">
-            <img class="w-5" src="/assets/social/facebook.svg" alt="facebook" />
+            <img width="20" src="/assets/social/facebook.svg" alt="facebook" />
         </a>
         <a class="px-4 sm:px-2" href="/">
             <img
-                class="w-5"
+                width="20"
                 src="/assets/social/instagram.svg"
                 alt="instagram" />
         </a>
         <a class="px-4 sm:px-2" href="/">
-            <img class="w-5" src="/assets/social/twitter.svg" alt="twitter" />
+            <img width="20" src="/assets/social/twitter.svg" alt="twitter" />
         </a>
     </div>
 </div>
