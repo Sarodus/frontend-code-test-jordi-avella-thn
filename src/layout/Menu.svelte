@@ -13,7 +13,7 @@
 <div
     class:flex={isOpen}
     class:hidden={!isOpen}
-    class="md:flex flex-col md:flex-row w-full md:h-16 items-center md:justify-evenly
+    class="font-dosis md:flex flex-col md:flex-row w-full md:h-16 items-center md:justify-evenly
         sm:max-w-screen-lg m-auto fixed md:relative bg-white">
     <a href="/" class="px-4 py-2 hover:underline">Home</a>
     <a href="/" class="px-4 py-2 hover:underline">Rooms</a>

@@ -1,74 +1,74 @@
 <script>
+    import { onMount } from "svelte";
+    import { requestRooms } from "../fakeapi";
+    import { bookDataStore } from "../store.js";
+
     import BookForm from "../components/BookForm.svelte";
     import RoomItem from "../components/RoomItem.svelte";
     import Steps from "../components/Steps.svelte";
+    import Summary from "../components/Summary.svelte";
 
-    const rooms = [
-        {
-            id: 1,
-            title: "Mini Dreamy Room",
-            description:
-                "Generous and confortable these modern furnished rooms offer two queen-size beds and are on the furst floor.",
-            size: 20,
-            beds: 1,
-            people: 2,
-            price: 200,
-            photo: "/assets/rooms/room_1.png",
-        },
-        {
-            id: 2,
-            title: "Sweet Bungalow",
-            description:
-                "The perfect blend of confort and culture, our superior room with a central garden view has stunning, and comes with something.",
-            size: 50,
-            beds: 1,
-            people: 2,
-            price: 350,
-            photo: "/assets/rooms/room_2.png",
-        },
-        {
-            id: 3,
-            title: "Los Cocos Suite",
-            description:
-                "If you want a little extra for tour stay, you might like our superior rooms. A ocean view room has a private beach and something.",
-            size: 125,
-            beds: 3,
-            people: 4,
-            price: 450,
-            photo: "/assets/rooms/room_3.png",
-        },
-    ];
+    onMount(async () => {
+        const res = await requestRooms();
+        rooms = res.rooms;
+
+        if ($bookDataStore.roomId) {
+            selectedRoom = rooms.find(
+                (room) => room.id === $bookDataStore.roomId
+            );
+        }
+    });
+
+    let rooms = [];
 
     const steps = [
-        { text: "Choose your room", allowed: true },
-        { text: "Enchance your stay", allowed: true },
-        { text: "Enter your information", allowed: false },
+        { text: "Choose your room" },
+        { text: "Enchance your stay" },
+        { text: "Enter your information", disabled: true },
     ];
+
+    let selectedRoom = undefined;
     let selectedStep = 0;
-    function onStepSelected(e) {
-        selectedStep = e.detail.index;
-        console.log("Selected step:", e.detail.index, e.detail.step);
-    }
 
     function onRoomSelect(room) {
-        console.log("Selected room:", room);
+        selectedRoom = room;
+    }
+
+    function onSaveSummary() {
+        bookDataStore.saveLocal(selectedRoom.id);
     }
 </script>
 
 <BookForm />
 
-<div class="p-10">
-    <div class="lg:px-12 xl:px-20 lg:w-1/2">
-        <h1 class="font-bold text-xl">Rooms & Rates</h1>
-        <p class="py-2">Plan your perfect stay at our hotel</p>
-        <div class="w-full">
-            <Steps bind:selectedStep on:select={onStepSelected} {steps} />
+<div class="flex flex-col md:flex-row py-16 px-4 lg:px-24">
+    <div class="flex flex-col w-full md:w-2/3">
+        <div class="h-56 lg:px-12 xl:px-32">
+            <h1 class="font-dosis font-bold text-xl">Rooms & Rates</h1>
+            <p class="py-2">Plan your perfect stay at our hotel</p>
+            <div class="w-full xl:max-w-xl">
+                <Steps bind:selectedStep {steps} />
+            </div>
+        </div>
+
+        <div>
+            {#each rooms as room}
+                <RoomItem {...room} on:click={() => onRoomSelect(room)} />
+            {/each}
         </div>
     </div>
-
-    <div class="pt-16">
-        {#each rooms as room}
-            <RoomItem {...room} on:click={() => onRoomSelect(room)} />
-        {/each}
+    <div class="w-full md:w-1/3 flex flex-col justify-center align-middle">
+        <div class="h-56 mx-auto mb-auto px-4">
+            <div class="flex h-full">
+                <img
+                    class="mt-auto hidden md:flex"
+                    src="/assets/los-cocos-img-bg.png"
+                    alt="coconut summary decoration" />
+            </div>
+            <Summary
+                room={selectedRoom}
+                book={$bookDataStore}
+                onSave={onSaveSummary} />
+        </div>
     </div>
 </div>

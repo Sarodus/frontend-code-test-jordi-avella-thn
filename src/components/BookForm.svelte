@@ -1,24 +1,18 @@
 <script>
     import { onMount } from "svelte";
-    import dayjs from "dayjs";
+    import { bookDataStore } from "../store.js";
 
     onMount(() => {
-        const today = dayjs();
-        const tomorrow = today.add(1, "day");
-
-        // Same format as browser's language
-        formData.checkin = today.toJSON().slice(0, 10);
-        formData.checkout = tomorrow.toJSON().slice(0, 10);
+        bookData = $bookDataStore;
     });
+
+    let bookData = {};
 
     const adultOptions = [1, 2, 3, 4];
     const childrenOptions = [0, 1, 2, 3, 4];
 
-    export let formData = {
-        checkin: undefined,
-        checkout: undefined,
-        adults: 2,
-        children: 0,
+    function modifyData() {
+        $bookDataStore = bookData;
     }
 </script>
 
@@ -31,32 +25,37 @@
 </style>
 
 <div id="book-form" class="w-full md:h-40 flex items-center justify-center">
-    <div
+    <form
         class="md:h-24 w-full flex flex-col md:flex-row md:items-center md:justify-center bg-blue-500 bg-opacity-50">
         <input
-            value={formData.checkin}
+            bind:value={bookData.checkin}
             class="p-3 m-2 md:w-auto rounded-sm"
-            type="date" />
+            type="date"
+            required />
         <input
-            value={formData.checkout}
+            bind:value={bookData.checkout}
             class="p-3 m-2 md:w-auto rounded-sm"
-            type="date" />
+            type="date"
+            required />
         <select
-            value={formData.adults}
+            bind:value={bookData.adults}
             class="p-3 m-2 md:w-auto rounded-sm bg-white">
             {#each adultOptions as value}
                 <option {value}>Adults: {value}</option>
             {/each}
         </select>
         <select
-            value={formData.children}
+            bind:value={bookData.children}
             class="p-3 m-2 md:w-auto rounded-sm bg-white">
             {#each childrenOptions as value}
-                <option {value}>Adults: {value}</option>
+                <option {value}>Children: {value}</option>
             {/each}
         </select>
-        <button class="p-3 m-2 md:w-40 bg-primary text-white text-bold">
+        <button
+            type="submit"
+            class="p-3 m-2 md:w-40 bg-primary text-white text-bold"
+            on:click|preventDefault={modifyData}>
             Modify
         </button>
-    </div>
+    </form>
 </div>

@@ -16,6 +16,9 @@ module.exports = {
         extend: {
             colors: {
                 primary: '#245AB0',
+            },
+            fontFamily: {
+                dosis: ["Dosis"],
             }
         },
     },

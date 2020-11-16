@@ -8,7 +8,6 @@
     @tailwind components;
     @tailwind utilities;
     body {
-        font-family: "Dosis";
         color: #444;
     }
 </style>
